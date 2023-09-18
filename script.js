@@ -11,7 +11,11 @@ async function getData(city){
     if(response.status === 404){
         document.querySelector(".error").style.display="block";
         document.querySelector(".weather").style.display="none";
-    }else{
+
+    }else if(inputBox.value === ''){
+        alert("Please enter city name!!!");
+
+    }else {
         var data=await response.json();
 
         document.querySelector(".name").innerHTML = data.name;
@@ -44,13 +48,11 @@ async function getData(city){
 };
 
 buttonSearch.addEventListener("click",()=>{
-    if(inputBox.value === ''){
-        alert("Please enter city name!!!");
-    }
-    else{
+        getData(inputBox.value);
+})
+
+inputBox.addEventListener("keydown",(event)=>{
+    if(event.keyCode === 13 || event.key === "Enter"){
         getData(inputBox.value);
     }
 })
-
-
-
